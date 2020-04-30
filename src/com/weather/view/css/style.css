@@ -1,0 +1,16 @@
+#background{
+	-fx-background-image: url('../images/bg.jpg');
+	-fx-background-size: cover, auto;
+}
+Button{
+	-fx-background-color: #232;
+}
+
+GridPane{
+	-fx-background-color: #123;
+	-fx-opacity: 0.75;
+	-fx-font-size: 20px;
+}
+GridPane > Label {
+	-fx-text-fill: #fff;
+}
