@@ -5,8 +5,6 @@ import javafx.scene.image.Image;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.URL;
 
 
@@ -26,7 +24,10 @@ public class CurrentWeather {
 
     private void setWeather(){
         try{
-            JSONObject jsonObject = new JSONObject(getJsonData());
+            URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&units=metric&appid=3912ed1a6ff815dbd2cd0b6b7643707e");
+            JSONReader jsonReader = new JSONReader(url);
+
+            JSONObject jsonObject = new JSONObject(jsonReader.getJsonData());
             JSONArray jsonArray = jsonObject.getJSONArray("weather");
 
             //set image
@@ -69,22 +70,6 @@ public class CurrentWeather {
 
         } catch (Exception e){
             e.printStackTrace();
-        }
-    }
-
-    private String getJsonData() {
-        try{
-            URL url = new URL("https://api.openweathermap.org/data/2.5/weather?q="+cityName+"&units=metric&appid=3912ed1a6ff815dbd2cd0b6b7643707e");
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(url.openStream()));
-            String inputLine;
-            StringBuilder stringBuilder = new StringBuilder();
-            while ((inputLine = bufferedReader.readLine()) != null){
-                stringBuilder.append(inputLine);
-            }
-            return stringBuilder.toString();
-        } catch (Exception e){
-            e.printStackTrace();
-            return "";
         }
     }
 

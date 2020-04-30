@@ -1,16 +1,17 @@
 package com.weather.controller;
 
 import com.weather.model.CurrentWeather;
+import com.weather.model.DayForecast;
+import com.weather.model.ForecastWeather;
 import com.weather.model.Validator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+
+import java.util.ArrayList;
 
 public class MainWindowController {
 
@@ -21,10 +22,10 @@ public class MainWindowController {
     private Button leftButton;
 
     @FXML
-    private ListView<?> leftListView;
+    private GridPane leftCurrentWeatherGridPane;
 
     @FXML
-    private GridPane leftFGridPane;
+    private GridPane leftForecastGridPane;
 
     @FXML
     private Label errorLabel;
@@ -36,14 +37,14 @@ public class MainWindowController {
     private Button rightButton;
 
     @FXML
-    private GridPane rightGridPane;
+    private GridPane rightCurrentWeatherGridPane;
 
     @FXML
-    private ListView<?> rightListView;
+    private GridPane rightForecastGridPane;
 
     private String cityName;
     private CurrentWeather currentWeather;
-    //private ForecastWeather forecastWeather;
+    private ForecastWeather forecastWeather;
 
     @FXML
     void getWeatherForecast(ActionEvent event) {
@@ -67,14 +68,13 @@ public class MainWindowController {
         if(validator.ifValidate()){
             errorLabel.setVisible(false);
             currentWeather = new CurrentWeather(cityName);
-            //forecastWeather = new ForecastWeather(cityName);
-            //forecastWeather.setWeather(cityName);
+            forecastWeather = new ForecastWeather(cityName);
             if(buttonName.equals("leftButton")){
-                displayCurrentWeather(leftFGridPane);
-                //seeForecastWeather(leftFGridPane);
+                displayCurrentWeather(leftCurrentWeatherGridPane);
+                displayForecastWeather(leftForecastGridPane);
             } else {
-                displayCurrentWeather(rightGridPane);
-               //seeForecastWeather(rightGridPane);
+                displayCurrentWeather(rightCurrentWeatherGridPane);
+                displayForecastWeather(rightForecastGridPane);
             }
         } else {
             errorLabel.setText("Sorry, you entered an invalid city name! Remember that you can only use letters and Polish characters!");
@@ -83,6 +83,28 @@ public class MainWindowController {
     }
 
     private void displayForecastWeather(GridPane gridPane) {
+        ArrayList<DayForecast> forecasts = forecastWeather.getForecastWeatherList();
+
+        //clean gridPane
+        gridPane.getChildren().clear();
+
+        for ( int i = 0; i < forecasts.size(); i++){
+
+            //set date
+            Label date = forecasts.get(i).getDate();
+            GridPane.setConstraints(date,0,i);
+
+            //image
+            ImageView image = new ImageView(forecasts.get(i).getImage());
+            GridPane.setConstraints(image,1,i);
+
+            //set text
+            Label text = new Label(forecasts.get(i).getDayTemperature() + " / " + forecasts.get(i).getNightTemperature());
+            GridPane.setConstraints(text,2,i);
+
+            gridPane.getChildren().addAll(date, image, text);
+
+        }
     }
 
     private void displayCurrentWeather(GridPane gridPane) {
