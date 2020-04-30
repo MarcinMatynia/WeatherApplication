@@ -6,6 +6,7 @@ import com.weather.model.ForecastWeather;
 import com.weather.model.Validator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.geometry.HPos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -105,6 +106,7 @@ public class MainWindowController {
             gridPane.getChildren().addAll(date, image, text);
 
         }
+        gridPane.setVisible(true);
     }
 
     private void displayCurrentWeather(GridPane gridPane) {
@@ -133,7 +135,9 @@ public class MainWindowController {
         Label wind = currentWeather.getWind();
         GridPane.setConstraints(wind,1,2);
 
+
         gridPane.getChildren().addAll(new ImageView(image), temp, pressure, precipitation, humidity, wind);
+        gridPane.setVisible(true);
     }
 
 }

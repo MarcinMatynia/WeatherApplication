@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Launcher extends Application {
@@ -17,6 +18,9 @@ public class Launcher extends Application {
 
         Scene scene = new Scene(parent);
         stage.setScene(scene);
+        stage.setResizable(false);
+        stage.getIcons().add(new Image(Launcher.class.getResourceAsStream("view/images/icon.png")));
+        stage.setTitle("Weather Application");
 
         stage.show();
 

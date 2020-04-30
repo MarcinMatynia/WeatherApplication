@@ -1,21 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="761.0" prefWidth="776.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.weather.controller.MainWindowController">
+<AnchorPane id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="761.0" prefWidth="776.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.weather.controller.MainWindowController">
    <children>
-      <TextField fx:id="leftTextField" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="299.0" />
-      <Button fx:id="leftButton" layoutX="323.0" layoutY="15.0" mnemonicParsing="false" onAction="#getWeatherForecast" text="Search" />
-      <GridPane fx:id="leftCurrentWeatherGridPane" layoutX="14.0" layoutY="100.0" prefHeight="193.0" prefWidth="362.0">
+      <TextField fx:id="leftTextField" blendMode="DIFFERENCE" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="299.0" promptText="Enter city name and click search">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+         <effect>
+            <DropShadow color="#a9e5ff" />
+         </effect></TextField>
+      <Button fx:id="leftButton" blendMode="HARD_LIGHT" contentDisplay="CENTER" layoutX="323.0" layoutY="15.0" mnemonicParsing="false" onAction="#getWeatherForecast" text="Search" textFill="#ffc876">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow color="#5e5e5e" />
+         </effect></Button>
+      <GridPane fx:id="leftCurrentWeatherGridPane" layoutX="14.0" layoutY="100.0" prefHeight="193.0" prefWidth="362.0" visible="false">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -23,11 +41,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <GridPane fx:id="leftForecastGridPane" layoutX="14.0" layoutY="306.0" prefHeight="427.0" prefWidth="362.0">
+      <GridPane fx:id="leftForecastGridPane" layoutX="14.0" layoutY="306.0" prefHeight="427.0" prefWidth="362.0" visible="false">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.0" minWidth="10.0" prefWidth="109.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="136.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="128.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="176.0" minWidth="10.0" prefWidth="109.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="136.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="128.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -37,13 +55,31 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <Label fx:id="errorLabel" layoutX="14.0" layoutY="47.0" prefHeight="17.0" prefWidth="720.0" />
-      <TextField fx:id="rightTextField" layoutX="398.0" layoutY="15.0" prefHeight="26.0" prefWidth="299.0" />
-      <Button fx:id="rightButton" layoutX="708.0" layoutY="15.0" mnemonicParsing="false" onAction="#getWeatherForecast" text="Search" />
-      <GridPane fx:id="rightCurrentWeatherGridPane" layoutX="401.0" layoutY="100.0" prefHeight="193.0" prefWidth="362.0">
+      <Label fx:id="errorLabel" alignment="CENTER" layoutX="14.0" layoutY="47.0" prefHeight="21.0" prefWidth="746.0" textAlignment="CENTER" textFill="RED">
+         <font>
+            <Font size="15.0" />
+         </font></Label>
+      <TextField fx:id="rightTextField" blendMode="DIFFERENCE" layoutX="401.0" layoutY="14.0" prefHeight="26.0" prefWidth="299.0" promptText="Enter city name and click search">
+         <font>
+            <Font size="13.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+         <effect>
+            <DropShadow color="#a9e5ff" />
+         </effect></TextField>
+      <Button fx:id="rightButton" blendMode="HARD_LIGHT" contentDisplay="CENTER" layoutX="708.0" layoutY="15.0" mnemonicParsing="false" onAction="#getWeatherForecast" text="Search" textFill="#ffc876">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <DropShadow color="#5e5e5e" />
+         </effect></Button>
+      <GridPane fx:id="rightCurrentWeatherGridPane" layoutX="401.0" layoutY="100.0" prefHeight="193.0" prefWidth="362.0" visible="false">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -51,11 +87,11 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
       </GridPane>
-      <GridPane fx:id="rightForecastGridPane" layoutX="398.0" layoutY="306.0" prefHeight="427.0" prefWidth="362.0">
+      <GridPane fx:id="rightForecastGridPane" layoutX="401.0" layoutY="306.0" prefHeight="427.0" prefWidth="362.0" visible="false">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
