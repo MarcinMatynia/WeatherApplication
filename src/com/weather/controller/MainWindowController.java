@@ -20,9 +20,6 @@ public class MainWindowController {
     private TextField leftTextField;
 
     @FXML
-    private Button leftButton;
-
-    @FXML
     private GridPane leftCurrentWeatherGridPane;
 
     @FXML
@@ -35,24 +32,22 @@ public class MainWindowController {
     private TextField rightTextField;
 
     @FXML
-    private Button rightButton;
-
-    @FXML
     private GridPane rightCurrentWeatherGridPane;
 
     @FXML
     private GridPane rightForecastGridPane;
 
     private String cityName;
-    private CurrentWeather currentWeather;
-    private ForecastWeather forecastWeather;
+    private final ForecastWeather forecastWeather = new ForecastWeather();
+    private final Validator validator = new Validator();
+    private final CurrentWeather currentWeather = new CurrentWeather();
 
     @FXML
     void getWeatherForecast(ActionEvent event) {
         Button sourceButton = (Button) event.getSource();
         String buttonName = sourceButton.getId();
 
-        switch (buttonName){
+        switch (buttonName) {
             case "leftButton":
                 cityName = leftTextField.getText();
                 break;
@@ -65,12 +60,11 @@ public class MainWindowController {
                 break;
         }
 
-        Validator validator = new Validator(cityName);
-        if(validator.ifValidate()){
+        if (validator.validate(cityName)) {
             errorLabel.setVisible(false);
-            currentWeather = new CurrentWeather(cityName);
-            forecastWeather = new ForecastWeather(cityName);
-            if(buttonName.equals("leftButton")){
+            currentWeather.fetchWeather(cityName);
+            forecastWeather.setForecastWeather(cityName);
+            if (buttonName.equals("leftButton")) {
                 displayCurrentWeather(leftCurrentWeatherGridPane);
                 displayForecastWeather(leftForecastGridPane);
             } else {
@@ -84,24 +78,24 @@ public class MainWindowController {
     }
 
     private void displayForecastWeather(GridPane gridPane) {
-        ArrayList<DayForecast> forecasts = forecastWeather.getForecastWeatherList();
+        var forecasts = forecastWeather.getForecastWeatherList();
 
         //clean gridPane
         gridPane.getChildren().clear();
 
-        for ( int i = 0; i < forecasts.size(); i++){
+        for (int i = 0; i < forecasts.size(); i++) {
 
             //set date
             Label date = forecasts.get(i).getDate();
-            GridPane.setConstraints(date,0,i);
+            GridPane.setConstraints(date, 0, i);
 
             //image
             ImageView image = new ImageView(forecasts.get(i).getImage());
-            GridPane.setConstraints(image,1,i);
+            GridPane.setConstraints(image, 1, i);
 
             //set text
             Label text = new Label(forecasts.get(i).getDayTemperature() + " / " + forecasts.get(i).getNightTemperature());
-            GridPane.setConstraints(text,2,i);
+            GridPane.setConstraints(text, 2, i);
 
             gridPane.getChildren().addAll(date, image, text);
 
@@ -117,23 +111,23 @@ public class MainWindowController {
 
         //temp
         Label temp = currentWeather.getTemperature();
-        GridPane.setConstraints(temp,1,0);
+        GridPane.setConstraints(temp, 1, 0);
 
         //pressure
         Label pressure = currentWeather.getPressure();
-        GridPane.setConstraints(pressure,0,1);
+        GridPane.setConstraints(pressure, 0, 1);
 
         //precipitation
         Label precipitation = currentWeather.getPrecipitation();
-        GridPane.setConstraints(precipitation,1,1);
+        GridPane.setConstraints(precipitation, 1, 1);
 
         //humidity
         Label humidity = currentWeather.getHumidity();
-        GridPane.setConstraints(humidity,0,2);
+        GridPane.setConstraints(humidity, 0, 2);
 
         //wind
         Label wind = currentWeather.getWind();
-        GridPane.setConstraints(wind,1,2);
+        GridPane.setConstraints(wind, 1, 2);
 
 
         gridPane.getChildren().addAll(new ImageView(image), temp, pressure, precipitation, humidity, wind);

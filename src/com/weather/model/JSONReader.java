@@ -1,6 +1,7 @@
 package com.weather.model;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 
@@ -20,7 +21,7 @@ public class JSONReader {
                 stringBuilder.append(inputLine);
             }
             return stringBuilder.toString();
-        } catch (Exception e){
+        } catch (IOException e){
             e.printStackTrace();
             return "";
         }
