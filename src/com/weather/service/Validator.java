@@ -1,4 +1,4 @@
-package com.weather.model;
+package com.weather.service;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.net.MalformedURLException;

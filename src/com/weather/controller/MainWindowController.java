@@ -1,18 +1,16 @@
 package com.weather.controller;
 
-import com.weather.model.CurrentWeather;
-import com.weather.model.DayForecast;
-import com.weather.model.ForecastWeather;
-import com.weather.model.Validator;
+import com.weather.service.FetchCurrentWeather;
+import com.weather.service.ForecastWeather;
+import com.weather.service.Validator;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.geometry.HPos;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
-
-import java.util.ArrayList;
 
 public class MainWindowController {
 
@@ -40,7 +38,7 @@ public class MainWindowController {
     private String cityName;
     private final ForecastWeather forecastWeather = new ForecastWeather();
     private final Validator validator = new Validator();
-    private final CurrentWeather currentWeather = new CurrentWeather();
+    private final FetchCurrentWeather fetchCurrentWeather = new FetchCurrentWeather();
 
     @FXML
     void getWeatherForecast(ActionEvent event) {
@@ -62,7 +60,7 @@ public class MainWindowController {
 
         if (validator.validate(cityName)) {
             errorLabel.setVisible(false);
-            currentWeather.fetchWeather(cityName);
+            fetchCurrentWeather.fetchWeather(cityName);
             forecastWeather.setForecastWeather(cityName);
             if (buttonName.equals("leftButton")) {
                 displayCurrentWeather(leftCurrentWeatherGridPane);
@@ -104,6 +102,7 @@ public class MainWindowController {
     }
 
     private void displayCurrentWeather(GridPane gridPane) {
+        var currentWeather = fetchCurrentWeather.getCurrentWeather();
         //clean gridPane
         gridPane.getChildren().clear();
         //image

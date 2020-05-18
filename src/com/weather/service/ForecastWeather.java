@@ -1,5 +1,6 @@
-package com.weather.model;
+package com.weather.service;
 
+import com.weather.model.DayForecast;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import org.json.JSONArray;
